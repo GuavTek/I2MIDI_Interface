@@ -14,7 +14,7 @@
 extern RingBuffer bufferUART_RX;
 
 void UART_Init();
-void UART_TX(uint8_t msg);
+uint8_t UART_TX(uint8_t msg);
 
 
 #endif /* UART_H_ */

@@ -4,8 +4,6 @@
 
 I2C.cpp
 
-I2MIDI.cpp
-
 main.cpp
 
 RingBuffer.cpp

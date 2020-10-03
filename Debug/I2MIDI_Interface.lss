@@ -3,271 +3,222 @@ I2MIDI_Interface.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  0000025e  2**0
+  0 .data         00000000  00800100  00800100  00000498  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000001ea  00000000  00000000  00000074  2**1
+  1 .text         00000424  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000204  00800100  00800100  0000025e  2**0
+  2 .bss          00000431  00800100  00800100  00000498  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  0000025e  2**0
+  3 .comment      00000030  00000000  00000000  00000498  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000290  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000004c8  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000000a0  00000000  00000000  000002cc  2**0
+  5 .debug_aranges 00000118  00000000  00000000  00000504  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000c1c  00000000  00000000  0000036c  2**0
+  6 .debug_info   0000125e  00000000  00000000  0000061c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000936  00000000  00000000  00000f88  2**0
+  7 .debug_abbrev 00000be7  00000000  00000000  0000187a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000402  00000000  00000000  000018be  2**0
+  8 .debug_line   00000794  00000000  00000000  00002461  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  0000017c  00000000  00000000  00001cc0  2**2
+  9 .debug_frame  000002b0  00000000  00000000  00002bf8  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000050f  00000000  00000000  00001e3c  2**0
+ 10 .debug_str    000006d0  00000000  00000000  00002ea8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000298  00000000  00000000  0000234b  2**0
+ 11 .debug_loc    000004c1  00000000  00000000  00003578  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000070  00000000  00000000  000025e3  2**0
+ 12 .debug_ranges 000000d8  00000000  00000000  00003a39  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
-   0:	0c 94 35 00 	jmp	0x6a	; 0x6a <__ctors_end>
-   4:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-   8:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-   c:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  10:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  14:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  18:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  1c:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  20:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  24:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  28:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  2c:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  30:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  34:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  38:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  3c:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  40:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  44:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  48:	0c 94 88 00 	jmp	0x110	; 0x110 <__vector_18>
-  4c:	0c 94 b0 00 	jmp	0x160	; 0x160 <__vector_19>
-  50:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  54:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  58:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  5c:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  60:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
-  64:	0c 94 52 00 	jmp	0xa4	; 0xa4 <__bad_interrupt>
+   0:	0c 94 36 00 	jmp	0x6c	; 0x6c <__ctors_end>
+   4:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+   8:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+   c:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  10:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  14:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  18:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  1c:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  20:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  24:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  28:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  2c:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  30:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  34:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  38:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  3c:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  40:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  44:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  48:	0c 94 a5 01 	jmp	0x34a	; 0x34a <__vector_18>
+  4c:	0c 94 cd 01 	jmp	0x39a	; 0x39a <__vector_19>
+  50:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  54:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  58:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  5c:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
+  60:	0c 94 b0 00 	jmp	0x160	; 0x160 <__vector_24>
+  64:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__bad_interrupt>
 
 00000068 <__ctors_start>:
-  68:	e4 00       	.word	0x00e4	; ????
+  68:	08 01       	movw	r0, r16
+  6a:	01 02       	muls	r16, r17
 
-0000006a <__ctors_end>:
-  6a:	11 24       	eor	r1, r1
-  6c:	1f be       	out	0x3f, r1	; 63
-  6e:	cf ef       	ldi	r28, 0xFF	; 255
-  70:	d8 e0       	ldi	r29, 0x08	; 8
-  72:	de bf       	out	0x3e, r29	; 62
-  74:	cd bf       	out	0x3d, r28	; 61
+0000006c <__ctors_end>:
+  6c:	11 24       	eor	r1, r1
+  6e:	1f be       	out	0x3f, r1	; 63
+  70:	cf ef       	ldi	r28, 0xFF	; 255
+  72:	d8 e0       	ldi	r29, 0x08	; 8
+  74:	de bf       	out	0x3e, r29	; 62
+  76:	cd bf       	out	0x3d, r28	; 61
 
-00000076 <__do_clear_bss>:
-  76:	23 e0       	ldi	r18, 0x03	; 3
-  78:	a0 e0       	ldi	r26, 0x00	; 0
-  7a:	b1 e0       	ldi	r27, 0x01	; 1
-  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+00000078 <__do_clear_bss>:
+  78:	25 e0       	ldi	r18, 0x05	; 5
+  7a:	a0 e0       	ldi	r26, 0x00	; 0
+  7c:	b1 e0       	ldi	r27, 0x01	; 1
+  7e:	01 c0       	rjmp	.+2      	; 0x82 <.do_clear_bss_start>
 
-0000007e <.do_clear_bss_loop>:
-  7e:	1d 92       	st	X+, r1
+00000080 <.do_clear_bss_loop>:
+  80:	1d 92       	st	X+, r1
 
-00000080 <.do_clear_bss_start>:
-  80:	a4 30       	cpi	r26, 0x04	; 4
-  82:	b2 07       	cpc	r27, r18
-  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+00000082 <.do_clear_bss_start>:
+  82:	a1 33       	cpi	r26, 0x31	; 49
+  84:	b2 07       	cpc	r27, r18
+  86:	e1 f7       	brne	.-8      	; 0x80 <.do_clear_bss_loop>
 
-00000086 <__do_global_ctors>:
-  86:	10 e0       	ldi	r17, 0x00	; 0
-  88:	c5 e3       	ldi	r28, 0x35	; 53
-  8a:	d0 e0       	ldi	r29, 0x00	; 0
-  8c:	04 c0       	rjmp	.+8      	; 0x96 <__do_global_ctors+0x10>
-  8e:	21 97       	sbiw	r28, 0x01	; 1
-  90:	fe 01       	movw	r30, r28
-  92:	0e 94 ed 00 	call	0x1da	; 0x1da <__tablejump2__>
-  96:	c4 33       	cpi	r28, 0x34	; 52
-  98:	d1 07       	cpc	r29, r17
-  9a:	c9 f7       	brne	.-14     	; 0x8e <__do_global_ctors+0x8>
-  9c:	0e 94 54 00 	call	0xa8	; 0xa8 <main>
-  a0:	0c 94 f3 00 	jmp	0x1e6	; 0x1e6 <_exit>
+00000088 <__do_global_ctors>:
+  88:	10 e0       	ldi	r17, 0x00	; 0
+  8a:	c6 e3       	ldi	r28, 0x36	; 54
+  8c:	d0 e0       	ldi	r29, 0x00	; 0
+  8e:	04 c0       	rjmp	.+8      	; 0x98 <__do_global_ctors+0x10>
+  90:	21 97       	sbiw	r28, 0x01	; 1
+  92:	fe 01       	movw	r30, r28
+  94:	0e 94 0a 02 	call	0x414	; 0x414 <__tablejump2__>
+  98:	c4 33       	cpi	r28, 0x34	; 52
+  9a:	d1 07       	cpc	r29, r17
+  9c:	c9 f7       	brne	.-14     	; 0x90 <__do_global_ctors+0x8>
+  9e:	0e 94 32 01 	call	0x264	; 0x264 <main>
+  a2:	0c 94 10 02 	jmp	0x420	; 0x420 <_exit>
 
-000000a4 <__bad_interrupt>:
-  a4:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+000000a6 <__bad_interrupt>:
+  a6:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-000000a8 <main>:
-
-#include "Includes.h"
-
-
-int main(void)
-{
-  a8:	ff cf       	rjmp	.-2      	; 0xa8 <main>
-
-000000aa <_ZN10RingBufferC1Ev>:
- */ 
-
-#include "Includes.h"
-
-RingBuffer::RingBuffer(){
-	tail = 0;
-  aa:	fc 01       	movw	r30, r24
-  ac:	ef 5f       	subi	r30, 0xFF	; 255
-  ae:	fe 4f       	sbci	r31, 0xFE	; 254
-  b0:	10 82       	st	Z, r1
-	head = 0;
-  b2:	31 97       	sbiw	r30, 0x01	; 1
-  b4:	10 82       	st	Z, r1
-  b6:	08 95       	ret
-
-000000b8 <_ZN10RingBuffer4ReadEv>:
-		buffer[head] = in;
+000000aa <_Z8I2C_Initv>:
+		wordHead = 0;
 	}
-}
-
-uint8_t RingBuffer::Count(){
-	return head - tail;
-  b8:	fc 01       	movw	r30, r24
-  ba:	ef 5f       	subi	r30, 0xFF	; 255
-  bc:	fe 4f       	sbci	r31, 0xFE	; 254
-  be:	20 81       	ld	r18, Z
-  c0:	31 97       	sbiw	r30, 0x01	; 1
-	tail = 0;
-	head = 0;
-}
-
-uint8_t RingBuffer::Read(){
-	if (Count() > 0)
-  c2:	30 81       	ld	r19, Z
-  c4:	32 17       	cp	r19, r18
-  c6:	41 f0       	breq	.+16     	; 0xd8 <_ZN10RingBuffer4ReadEv+0x20>
-	{
-		tail++;
-  c8:	2f 5f       	subi	r18, 0xFF	; 255
-  ca:	31 96       	adiw	r30, 0x01	; 1
-  cc:	20 83       	st	Z, r18
-		return buffer[tail];
-  ce:	fc 01       	movw	r30, r24
-  d0:	e2 0f       	add	r30, r18
-  d2:	f1 1d       	adc	r31, r1
-  d4:	80 81       	ld	r24, Z
-  d6:	08 95       	ret
-	}
-	return 0;
-  d8:	80 e0       	ldi	r24, 0x00	; 0
-}
-  da:	08 95       	ret
-
-000000dc <_ZN10RingBuffer5WriteEh>:
-		buffer[head] = in;
-	}
-}
-
-uint8_t RingBuffer::Count(){
-	return head - tail;
-  dc:	fc 01       	movw	r30, r24
-  de:	f3 95       	inc	r31
-  e0:	20 81       	ld	r18, Z
-  e2:	31 96       	adiw	r30, 0x01	; 1
-	}
-	return 0;
-}
-
-void RingBuffer::Write(uint8_t in){
-	if (Count() < 255)
-  e4:	30 81       	ld	r19, Z
-  e6:	42 2f       	mov	r20, r18
-  e8:	43 1b       	sub	r20, r19
-  ea:	4f 3f       	cpi	r20, 0xFF	; 255
-  ec:	39 f0       	breq	.+14     	; 0xfc <_ZN10RingBuffer5WriteEh+0x20>
-	{
-		head++;
-  ee:	2f 5f       	subi	r18, 0xFF	; 255
-  f0:	31 97       	sbiw	r30, 0x01	; 1
-  f2:	20 83       	st	Z, r18
-		buffer[head] = in;
-  f4:	fc 01       	movw	r30, r24
-  f6:	e2 0f       	add	r30, r18
-  f8:	f1 1d       	adc	r31, r1
-  fa:	60 83       	st	Z, r22
-  fc:	08 95       	ret
-
-000000fe <_ZN10RingBuffer5CountEv>:
-	}
-}
-
-uint8_t RingBuffer::Count(){
-	return head - tail;
-  fe:	dc 01       	movw	r26, r24
- 100:	b3 95       	inc	r27
- 102:	fc 01       	movw	r30, r24
- 104:	ef 5f       	subi	r30, 0xFF	; 255
- 106:	fe 4f       	sbci	r31, 0xFE	; 254
- 108:	8c 91       	ld	r24, X
- 10a:	90 81       	ld	r25, Z
-}
- 10c:	89 1b       	sub	r24, r25
- 10e:	08 95       	ret
-
-00000110 <__vector_18>:
+	wordLength[wordHead] = length;
 	
-	//Enable interrupt
-	UCSR0B |= 1 << UDRIE0;
+	return 0;	//Success
+}
+  aa:	88 e4       	ldi	r24, 0x48	; 72
+  ac:	80 93 b8 00 	sts	0x00B8, r24	; 0x8000b8 <__DATA_REGION_ORIGIN__+0x58>
+  b0:	88 ed       	ldi	r24, 0xD8	; 216
+  b2:	80 93 ba 00 	sts	0x00BA, r24	; 0x8000ba <__DATA_REGION_ORIGIN__+0x5a>
+  b6:	85 e4       	ldi	r24, 0x45	; 69
+  b8:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__DATA_REGION_ORIGIN__+0x5c>
+  bc:	08 95       	ret
+
+000000be <_Z17StartTransmissionv>:
+  be:	80 91 04 03 	lds	r24, 0x0304	; 0x800304 <isTransmitting>
+  c2:	81 11       	cpse	r24, r1
+  c4:	08 c0       	rjmp	.+16     	; 0xd6 <_Z17StartTransmissionv+0x18>
+  c6:	ec eb       	ldi	r30, 0xBC	; 188
+  c8:	f0 e0       	ldi	r31, 0x00	; 0
+  ca:	80 81       	ld	r24, Z
+  cc:	80 62       	ori	r24, 0x20	; 32
+  ce:	80 83       	st	Z, r24
+  d0:	81 e0       	ldi	r24, 0x01	; 1
+  d2:	80 93 04 03 	sts	0x0304, r24	; 0x800304 <isTransmitting>
+  d6:	08 95       	ret
+
+000000d8 <_Z15EndTransmissionv>:
+  d8:	ec eb       	ldi	r30, 0xBC	; 188
+  da:	f0 e0       	ldi	r31, 0x00	; 0
+  dc:	80 81       	ld	r24, Z
+  de:	80 61       	ori	r24, 0x10	; 16
+  e0:	80 83       	st	Z, r24
+  e2:	10 92 04 03 	sts	0x0304, r1	; 0x800304 <isTransmitting>
+  e6:	08 95       	ret
+
+000000e8 <_Z7SendI2Ch>:
+  e8:	80 91 05 03 	lds	r24, 0x0305	; 0x800305 <wordTail>
+  ec:	90 e0       	ldi	r25, 0x00	; 0
+  ee:	fc 01       	movw	r30, r24
+  f0:	e9 5f       	subi	r30, 0xF9	; 249
+  f2:	fc 4f       	sbci	r31, 0xFC	; 252
+  f4:	20 81       	ld	r18, Z
+  f6:	21 11       	cpse	r18, r1
+  f8:	0d c0       	rjmp	.+26     	; 0x114 <_Z7SendI2Ch+0x2c>
+  fa:	0e 94 6c 00 	call	0xd8	; 0xd8 <_Z15EndTransmissionv>
+  fe:	80 91 05 03 	lds	r24, 0x0305	; 0x800305 <wordTail>
+ 102:	8f 5f       	subi	r24, 0xFF	; 255
+ 104:	80 32       	cpi	r24, 0x20	; 32
+ 106:	18 f4       	brcc	.+6      	; 0x10e <_Z7SendI2Ch+0x26>
+ 108:	80 93 05 03 	sts	0x0305, r24	; 0x800305 <wordTail>
+ 10c:	08 95       	ret
+ 10e:	10 92 05 03 	sts	0x0305, r1	; 0x800305 <wordTail>
+ 112:	08 95       	ret
+ 114:	fc 01       	movw	r30, r24
+ 116:	e9 5f       	subi	r30, 0xF9	; 249
+ 118:	fc 4f       	sbci	r31, 0xFC	; 252
+ 11a:	21 50       	subi	r18, 0x01	; 1
+ 11c:	20 83       	st	Z, r18
+ 11e:	80 e0       	ldi	r24, 0x00	; 0
+ 120:	91 e0       	ldi	r25, 0x01	; 1
+ 122:	0e 94 55 01 	call	0x2aa	; 0x2aa <_ZN10RingBuffer4ReadEv>
+ 126:	80 93 27 03 	sts	0x0327, r24	; 0x800327 <currentChar>
+ 12a:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__DATA_REGION_ORIGIN__+0x5b>
+ 12e:	08 95       	ret
+
+00000130 <_Z12WordCountI2Cv>:
+ 130:	80 91 06 03 	lds	r24, 0x0306	; 0x800306 <wordHead>
+ 134:	90 91 05 03 	lds	r25, 0x0305	; 0x800305 <wordTail>
+ 138:	89 1b       	sub	r24, r25
+ 13a:	08 95       	ret
+
+0000013c <_Z5TXI2Ch>:
+	}*/
+	return tempCount;
 }
 
-ISR(USART_RX_vect){
- 110:	1f 92       	push	r1
- 112:	0f 92       	push	r0
- 114:	0f b6       	in	r0, 0x3f	; 63
- 116:	0f 92       	push	r0
- 118:	11 24       	eor	r1, r1
- 11a:	2f 93       	push	r18
- 11c:	3f 93       	push	r19
- 11e:	4f 93       	push	r20
- 120:	5f 93       	push	r21
- 122:	6f 93       	push	r22
- 124:	7f 93       	push	r23
- 126:	8f 93       	push	r24
- 128:	9f 93       	push	r25
- 12a:	af 93       	push	r26
- 12c:	bf 93       	push	r27
- 12e:	ef 93       	push	r30
- 130:	ff 93       	push	r31
-	uint8_t rx = UDR0;
- 132:	60 91 c6 00 	lds	r22, 0x00C6	; 0x8000c6 <__DATA_REGION_ORIGIN__+0x66>
-	bufferUART_RX.Write(rx);
- 136:	82 e0       	ldi	r24, 0x02	; 2
- 138:	92 e0       	ldi	r25, 0x02	; 2
- 13a:	0e 94 6e 00 	call	0xdc	; 0xdc <_ZN10RingBuffer5WriteEh>
+//Loads I2C byte into buffer
+uint8_t TXI2C(uint8_t msg){
+ 13c:	cf 93       	push	r28
+ 13e:	c8 2f       	mov	r28, r24
+	if (I2Cbuffer_TX.Count() > 254)
+ 140:	80 e0       	ldi	r24, 0x00	; 0
+ 142:	91 e0       	ldi	r25, 0x01	; 1
+ 144:	0e 94 78 01 	call	0x2f0	; 0x2f0 <_ZN10RingBuffer5CountEv>
+ 148:	8f 3f       	cpi	r24, 0xFF	; 255
+ 14a:	39 f0       	breq	.+14     	; 0x15a <_Z5TXI2Ch+0x1e>
+	{
+		return 1;
+	}
+	I2Cbuffer_TX.Write(msg);
+ 14c:	6c 2f       	mov	r22, r28
+ 14e:	80 e0       	ldi	r24, 0x00	; 0
+ 150:	91 e0       	ldi	r25, 0x01	; 1
+ 152:	0e 94 67 01 	call	0x2ce	; 0x2ce <_ZN10RingBuffer5WriteEh>
+	return 0;
+ 156:	80 e0       	ldi	r24, 0x00	; 0
+ 158:	01 c0       	rjmp	.+2      	; 0x15c <_Z5TXI2Ch+0x20>
+
+//Loads I2C byte into buffer
+uint8_t TXI2C(uint8_t msg){
+	if (I2Cbuffer_TX.Count() > 254)
+	{
+		return 1;
+ 15a:	81 e0       	ldi	r24, 0x01	; 1
+	}
+	I2Cbuffer_TX.Write(msg);
+	return 0;
 }
- 13e:	ff 91       	pop	r31
- 140:	ef 91       	pop	r30
- 142:	bf 91       	pop	r27
- 144:	af 91       	pop	r26
- 146:	9f 91       	pop	r25
- 148:	8f 91       	pop	r24
- 14a:	7f 91       	pop	r23
- 14c:	6f 91       	pop	r22
- 14e:	5f 91       	pop	r21
- 150:	4f 91       	pop	r20
- 152:	3f 91       	pop	r19
- 154:	2f 91       	pop	r18
- 156:	0f 90       	pop	r0
- 158:	0f be       	out	0x3f, r0	; 63
- 15a:	0f 90       	pop	r0
- 15c:	1f 90       	pop	r1
- 15e:	18 95       	reti
+ 15c:	cf 91       	pop	r28
+ 15e:	08 95       	ret
 
-00000160 <__vector_19>:
+00000160 <__vector_24>:
 
-ISR(USART_UDRE_vect){
+ISR(TWI_vect){
  160:	1f 92       	push	r1
  162:	0f 92       	push	r0
  164:	0f b6       	in	r0, 0x3f	; 63
@@ -285,73 +236,500 @@ ISR(USART_UDRE_vect){
  17c:	bf 93       	push	r27
  17e:	ef 93       	push	r30
  180:	ff 93       	push	r31
+	uint8_t status = TWSR & 0b11111000;
+ 182:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__DATA_REGION_ORIGIN__+0x59>
+ 186:	38 2f       	mov	r19, r24
+ 188:	38 7f       	andi	r19, 0xF8	; 248
+	if ((status  == 0x80)|(status == 0x88)|(status == 0x90)|(status == 0x98))
+ 18a:	98 2f       	mov	r25, r24
+ 18c:	90 7f       	andi	r25, 0xF0	; 240
+ 18e:	21 e0       	ldi	r18, 0x01	; 1
+ 190:	90 38       	cpi	r25, 0x80	; 128
+ 192:	09 f0       	breq	.+2      	; 0x196 <__vector_24+0x36>
+ 194:	20 e0       	ldi	r18, 0x00	; 0
+ 196:	21 11       	cpse	r18, r1
+ 198:	06 c0       	rjmp	.+12     	; 0x1a6 <__vector_24+0x46>
+ 19a:	21 e0       	ldi	r18, 0x01	; 1
+ 19c:	90 39       	cpi	r25, 0x90	; 144
+ 19e:	09 f0       	breq	.+2      	; 0x1a2 <__vector_24+0x42>
+ 1a0:	20 e0       	ldi	r18, 0x00	; 0
+ 1a2:	22 23       	and	r18, r18
+ 1a4:	39 f0       	breq	.+14     	; 0x1b4 <__vector_24+0x54>
+	{
+		I2Cbuffer_RX.Write(TWDR);
+ 1a6:	60 91 bb 00 	lds	r22, 0x00BB	; 0x8000bb <__DATA_REGION_ORIGIN__+0x5b>
+ 1aa:	82 e0       	ldi	r24, 0x02	; 2
+ 1ac:	92 e0       	ldi	r25, 0x02	; 2
+ 1ae:	0e 94 67 01 	call	0x2ce	; 0x2ce <_ZN10RingBuffer5WriteEh>
+ 1b2:	18 c0       	rjmp	.+48     	; 0x1e4 <__vector_24+0x84>
+	}
+	else if ((status == 0x08)|(status == 0x10)|(status == 0x28))
+ 1b4:	21 e0       	ldi	r18, 0x01	; 1
+ 1b6:	98 2f       	mov	r25, r24
+ 1b8:	98 7d       	andi	r25, 0xD8	; 216
+ 1ba:	98 30       	cpi	r25, 0x08	; 8
+ 1bc:	09 f0       	breq	.+2      	; 0x1c0 <__vector_24+0x60>
+ 1be:	20 e0       	ldi	r18, 0x00	; 0
+ 1c0:	21 11       	cpse	r18, r1
+ 1c2:	06 c0       	rjmp	.+12     	; 0x1d0 <__vector_24+0x70>
+ 1c4:	91 e0       	ldi	r25, 0x01	; 1
+ 1c6:	30 31       	cpi	r19, 0x10	; 16
+ 1c8:	09 f0       	breq	.+2      	; 0x1cc <__vector_24+0x6c>
+ 1ca:	90 e0       	ldi	r25, 0x00	; 0
+ 1cc:	99 23       	and	r25, r25
+ 1ce:	21 f0       	breq	.+8      	; 0x1d8 <__vector_24+0x78>
+	{
+		//ACK received
+		SendI2C(1);
+ 1d0:	81 e0       	ldi	r24, 0x01	; 1
+ 1d2:	0e 94 74 00 	call	0xe8	; 0xe8 <_Z7SendI2Ch>
+ 1d6:	06 c0       	rjmp	.+12     	; 0x1e4 <__vector_24+0x84>
+	}
+	else if ((status == 0x20)|(status == 0x30))
+ 1d8:	88 7e       	andi	r24, 0xE8	; 232
+ 1da:	80 32       	cpi	r24, 0x20	; 32
+ 1dc:	19 f4       	brne	.+6      	; 0x1e4 <__vector_24+0x84>
+	{
+		//not ack
+		SendI2C(0);
+ 1de:	80 e0       	ldi	r24, 0x00	; 0
+ 1e0:	0e 94 74 00 	call	0xe8	; 0xe8 <_Z7SendI2Ch>
+	}
+	TWCR |= 1 << TWINT;
+ 1e4:	ec eb       	ldi	r30, 0xBC	; 188
+ 1e6:	f0 e0       	ldi	r31, 0x00	; 0
+ 1e8:	80 81       	ld	r24, Z
+ 1ea:	80 68       	ori	r24, 0x80	; 128
+ 1ec:	80 83       	st	Z, r24
+ 1ee:	ff 91       	pop	r31
+ 1f0:	ef 91       	pop	r30
+ 1f2:	bf 91       	pop	r27
+ 1f4:	af 91       	pop	r26
+ 1f6:	9f 91       	pop	r25
+ 1f8:	8f 91       	pop	r24
+ 1fa:	7f 91       	pop	r23
+ 1fc:	6f 91       	pop	r22
+ 1fe:	5f 91       	pop	r21
+ 200:	4f 91       	pop	r20
+ 202:	3f 91       	pop	r19
+ 204:	2f 91       	pop	r18
+ 206:	0f 90       	pop	r0
+ 208:	0f be       	out	0x3f, r0	; 63
+ 20a:	0f 90       	pop	r0
+ 20c:	1f 90       	pop	r1
+ 20e:	18 95       	reti
+
+00000210 <_GLOBAL__sub_I_currentChar>:
+	uint8_t wordHead = 0;
+	uint8_t wordTail = 0;
+	
+	bool isTransmitting = false;
+	
+	RingBuffer I2Cbuffer_RX;
+ 210:	82 e0       	ldi	r24, 0x02	; 2
+ 212:	92 e0       	ldi	r25, 0x02	; 2
+ 214:	0e 94 4e 01 	call	0x29c	; 0x29c <_ZN10RingBufferC1Ev>
+	RingBuffer I2Cbuffer_TX;
+ 218:	80 e0       	ldi	r24, 0x00	; 0
+ 21a:	91 e0       	ldi	r25, 0x01	; 1
+ 21c:	0e 94 4e 01 	call	0x29c	; 0x29c <_ZN10RingBufferC1Ev>
+ 220:	08 95       	ret
+
+00000222 <_Z5Mergev>:
+		
+    }
+}
+
+void Merge(){
+	if (status.dinDone && status.I2CDone) {
+ 222:	80 91 2b 03 	lds	r24, 0x032B	; 0x80032b <status+0x2>
+ 226:	88 23       	and	r24, r24
+ 228:	29 f0       	breq	.+10     	; 0x234 <_Z5Mergev+0x12>
+ 22a:	80 91 2c 03 	lds	r24, 0x032C	; 0x80032c <status+0x3>
+ 22e:	88 23       	and	r24, r24
+ 230:	29 f0       	breq	.+10     	; 0x23c <_Z5Mergev+0x1a>
+ 232:	08 95       	ret
+		
+	} else if (!status.I2CDone) {
+ 234:	80 91 2c 03 	lds	r24, 0x032C	; 0x80032c <status+0x3>
+ 238:	81 11       	cpse	r24, r1
+ 23a:	0a c0       	rjmp	.+20     	; 0x250 <_Z5Mergev+0x2e>
+		if (!TXI2C(status.currentChar))
+ 23c:	80 91 29 03 	lds	r24, 0x0329	; 0x800329 <status>
+ 240:	0e 94 9e 00 	call	0x13c	; 0x13c <_Z5TXI2Ch>
+ 244:	81 11       	cpse	r24, r1
+ 246:	0d c0       	rjmp	.+26     	; 0x262 <_Z5Mergev+0x40>
+		{
+			status.I2CDone = 1;
+ 248:	81 e0       	ldi	r24, 0x01	; 1
+ 24a:	80 93 2c 03 	sts	0x032C, r24	; 0x80032c <status+0x3>
+ 24e:	08 95       	ret
+		}
+	} else {
+		if (!UART_TX(status.currentChar))
+ 250:	80 91 29 03 	lds	r24, 0x0329	; 0x800329 <status>
+ 254:	0e 94 8e 01 	call	0x31c	; 0x31c <_Z7UART_TXh>
+ 258:	81 11       	cpse	r24, r1
+ 25a:	03 c0       	rjmp	.+6      	; 0x262 <_Z5Mergev+0x40>
+		{
+			status.dinDone = 1;
+ 25c:	81 e0       	ldi	r24, 0x01	; 1
+ 25e:	80 93 2b 03 	sts	0x032B, r24	; 0x80032b <status+0x2>
+ 262:	08 95       	ret
+
+00000264 <main>:
+struct MergeStatus status;
+bool thruUART = false;
+
+int main(void)
+{
+	UART_Init();
+ 264:	0e 94 81 01 	call	0x302	; 0x302 <_Z9UART_Initv>
+	I2C_Init();
+ 268:	0e 94 55 00 	call	0xaa	; 0xaa <_Z8I2C_Initv>
+	PORTB = 1 << PINB4;	//Pullup, insert button
+ 26c:	80 e1       	ldi	r24, 0x10	; 16
+ 26e:	85 b9       	out	0x05, r24	; 5
+	DDRB = 1 << PINB3;	//Insert led
+ 270:	88 e0       	ldi	r24, 0x08	; 8
+ 272:	84 b9       	out	0x04, r24	; 4
+	status.currentSource = DIN5;
+ 274:	e9 e2       	ldi	r30, 0x29	; 41
+ 276:	f3 e0       	ldi	r31, 0x03	; 3
+ 278:	11 82       	std	Z+1, r1	; 0x01
+	status.dinDone = 1;
+ 27a:	81 e0       	ldi	r24, 0x01	; 1
+ 27c:	82 83       	std	Z+2, r24	; 0x02
+	status.I2CDone = 1;
+ 27e:	83 83       	std	Z+3, r24	; 0x03
+	
+	
+    while (1) 
+    {
+		thruUART = PINB & (1 << PINB4);	//Insert button here
+ 280:	83 b1       	in	r24, 0x03	; 3
+ 282:	82 95       	swap	r24
+ 284:	81 70       	andi	r24, 0x01	; 1
+ 286:	80 93 28 03 	sts	0x0328, r24	; 0x800328 <thruUART>
+		Merge();
+ 28a:	0e 94 11 01 	call	0x222	; 0x222 <_Z5Mergev>
+		
+		if (WordCountI2C() > 0)
+ 28e:	0e 94 98 00 	call	0x130	; 0x130 <_Z12WordCountI2Cv>
+ 292:	88 23       	and	r24, r24
+ 294:	a9 f3       	breq	.-22     	; 0x280 <main+0x1c>
+		{
+			StartTransmission();
+ 296:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z17StartTransmissionv>
+ 29a:	f2 cf       	rjmp	.-28     	; 0x280 <main+0x1c>
+
+0000029c <_ZN10RingBufferC1Ev>:
+ */ 
+
+#include "Includes.h"
+
+RingBuffer::RingBuffer(){
+	tail = 0;
+ 29c:	fc 01       	movw	r30, r24
+ 29e:	ef 5f       	subi	r30, 0xFF	; 255
+ 2a0:	fe 4f       	sbci	r31, 0xFE	; 254
+ 2a2:	10 82       	st	Z, r1
+	head = 0;
+ 2a4:	31 97       	sbiw	r30, 0x01	; 1
+ 2a6:	10 82       	st	Z, r1
+ 2a8:	08 95       	ret
+
+000002aa <_ZN10RingBuffer4ReadEv>:
+		buffer[head] = in;
+	}
+}
+
+uint8_t RingBuffer::Count(){
+	return head - tail;
+ 2aa:	fc 01       	movw	r30, r24
+ 2ac:	ef 5f       	subi	r30, 0xFF	; 255
+ 2ae:	fe 4f       	sbci	r31, 0xFE	; 254
+ 2b0:	20 81       	ld	r18, Z
+ 2b2:	31 97       	sbiw	r30, 0x01	; 1
+	tail = 0;
+	head = 0;
+}
+
+uint8_t RingBuffer::Read(){
+	if (Count() > 0)
+ 2b4:	30 81       	ld	r19, Z
+ 2b6:	32 17       	cp	r19, r18
+ 2b8:	41 f0       	breq	.+16     	; 0x2ca <_ZN10RingBuffer4ReadEv+0x20>
+	{
+		tail++;
+ 2ba:	2f 5f       	subi	r18, 0xFF	; 255
+ 2bc:	31 96       	adiw	r30, 0x01	; 1
+ 2be:	20 83       	st	Z, r18
+		return buffer[tail];
+ 2c0:	fc 01       	movw	r30, r24
+ 2c2:	e2 0f       	add	r30, r18
+ 2c4:	f1 1d       	adc	r31, r1
+ 2c6:	80 81       	ld	r24, Z
+ 2c8:	08 95       	ret
+	}
+	return 0;
+ 2ca:	80 e0       	ldi	r24, 0x00	; 0
+}
+ 2cc:	08 95       	ret
+
+000002ce <_ZN10RingBuffer5WriteEh>:
+		buffer[head] = in;
+	}
+}
+
+uint8_t RingBuffer::Count(){
+	return head - tail;
+ 2ce:	fc 01       	movw	r30, r24
+ 2d0:	f3 95       	inc	r31
+ 2d2:	20 81       	ld	r18, Z
+ 2d4:	31 96       	adiw	r30, 0x01	; 1
+	}
+	return 0;
+}
+
+void RingBuffer::Write(uint8_t in){
+	if (Count() < 255)
+ 2d6:	30 81       	ld	r19, Z
+ 2d8:	42 2f       	mov	r20, r18
+ 2da:	43 1b       	sub	r20, r19
+ 2dc:	4f 3f       	cpi	r20, 0xFF	; 255
+ 2de:	39 f0       	breq	.+14     	; 0x2ee <_ZN10RingBuffer5WriteEh+0x20>
+	{
+		head++;
+ 2e0:	2f 5f       	subi	r18, 0xFF	; 255
+ 2e2:	31 97       	sbiw	r30, 0x01	; 1
+ 2e4:	20 83       	st	Z, r18
+		buffer[head] = in;
+ 2e6:	fc 01       	movw	r30, r24
+ 2e8:	e2 0f       	add	r30, r18
+ 2ea:	f1 1d       	adc	r31, r1
+ 2ec:	60 83       	st	Z, r22
+ 2ee:	08 95       	ret
+
+000002f0 <_ZN10RingBuffer5CountEv>:
+	}
+}
+
+uint8_t RingBuffer::Count(){
+	return head - tail;
+ 2f0:	dc 01       	movw	r26, r24
+ 2f2:	b3 95       	inc	r27
+ 2f4:	fc 01       	movw	r30, r24
+ 2f6:	ef 5f       	subi	r30, 0xFF	; 255
+ 2f8:	fe 4f       	sbci	r31, 0xFE	; 254
+ 2fa:	8c 91       	ld	r24, X
+ 2fc:	90 81       	ld	r25, Z
+}
+ 2fe:	89 1b       	sub	r24, r25
+ 300:	08 95       	ret
+
+00000302 <_Z9UART_Initv>:
+
+#define MIDIRate (F_CPU/(16*31250))-1
+
+void UART_Init(){
+	//Set Baudrate = 31250Hz
+	UBRR0 = MIDIRate;
+ 302:	8d e6       	ldi	r24, 0x6D	; 109
+ 304:	9d ef       	ldi	r25, 0xFD	; 253
+ 306:	90 93 c5 00 	sts	0x00C5, r25	; 0x8000c5 <__DATA_REGION_ORIGIN__+0x65>
+ 30a:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__DATA_REGION_ORIGIN__+0x64>
+	
+	//Enable RX, TX, and interrupts
+	UCSR0B = (1 << RXEN0)|(1 << TXEN0)|(1 << RXCIE0);
+ 30e:	88 e9       	ldi	r24, 0x98	; 152
+ 310:	80 93 c1 00 	sts	0x00C1, r24	; 0x8000c1 <__DATA_REGION_ORIGIN__+0x61>
+	
+	//Set frame format: 8bit, 1stop
+	UCSR0C = 0b11 << UCSZ00;
+ 314:	86 e0       	ldi	r24, 0x06	; 6
+ 316:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__DATA_REGION_ORIGIN__+0x62>
+ 31a:	08 95       	ret
+
+0000031c <_Z7UART_TXh>:
+}
+
+uint8_t UART_TX(uint8_t msg){
+ 31c:	cf 93       	push	r28
+ 31e:	c8 2f       	mov	r28, r24
+	if (bufferUART_TX.Count() > 254)
+ 320:	8d e2       	ldi	r24, 0x2D	; 45
+ 322:	93 e0       	ldi	r25, 0x03	; 3
+ 324:	0e 94 78 01 	call	0x2f0	; 0x2f0 <_ZN10RingBuffer5CountEv>
+ 328:	8f 3f       	cpi	r24, 0xFF	; 255
+ 32a:	61 f0       	breq	.+24     	; 0x344 <_Z7UART_TXh+0x28>
+	{
+		return 1;
+	}
+	bufferUART_TX.Write(msg);
+ 32c:	6c 2f       	mov	r22, r28
+ 32e:	8d e2       	ldi	r24, 0x2D	; 45
+ 330:	93 e0       	ldi	r25, 0x03	; 3
+ 332:	0e 94 67 01 	call	0x2ce	; 0x2ce <_ZN10RingBuffer5WriteEh>
+	
+	//Enable interrupt
+	UCSR0B |= 1 << UDRIE0;
+ 336:	e1 ec       	ldi	r30, 0xC1	; 193
+ 338:	f0 e0       	ldi	r31, 0x00	; 0
+ 33a:	80 81       	ld	r24, Z
+ 33c:	80 62       	ori	r24, 0x20	; 32
+ 33e:	80 83       	st	Z, r24
+	return 0;
+ 340:	80 e0       	ldi	r24, 0x00	; 0
+ 342:	01 c0       	rjmp	.+2      	; 0x346 <_Z7UART_TXh+0x2a>
+}
+
+uint8_t UART_TX(uint8_t msg){
+	if (bufferUART_TX.Count() > 254)
+	{
+		return 1;
+ 344:	81 e0       	ldi	r24, 0x01	; 1
+	bufferUART_TX.Write(msg);
+	
+	//Enable interrupt
+	UCSR0B |= 1 << UDRIE0;
+	return 0;
+}
+ 346:	cf 91       	pop	r28
+ 348:	08 95       	ret
+
+0000034a <__vector_18>:
+
+ISR(USART_RX_vect){
+ 34a:	1f 92       	push	r1
+ 34c:	0f 92       	push	r0
+ 34e:	0f b6       	in	r0, 0x3f	; 63
+ 350:	0f 92       	push	r0
+ 352:	11 24       	eor	r1, r1
+ 354:	2f 93       	push	r18
+ 356:	3f 93       	push	r19
+ 358:	4f 93       	push	r20
+ 35a:	5f 93       	push	r21
+ 35c:	6f 93       	push	r22
+ 35e:	7f 93       	push	r23
+ 360:	8f 93       	push	r24
+ 362:	9f 93       	push	r25
+ 364:	af 93       	push	r26
+ 366:	bf 93       	push	r27
+ 368:	ef 93       	push	r30
+ 36a:	ff 93       	push	r31
+	uint8_t rx = UDR0;
+ 36c:	60 91 c6 00 	lds	r22, 0x00C6	; 0x8000c6 <__DATA_REGION_ORIGIN__+0x66>
+	bufferUART_RX.Write(rx);
+ 370:	8f e2       	ldi	r24, 0x2F	; 47
+ 372:	94 e0       	ldi	r25, 0x04	; 4
+ 374:	0e 94 67 01 	call	0x2ce	; 0x2ce <_ZN10RingBuffer5WriteEh>
+}
+ 378:	ff 91       	pop	r31
+ 37a:	ef 91       	pop	r30
+ 37c:	bf 91       	pop	r27
+ 37e:	af 91       	pop	r26
+ 380:	9f 91       	pop	r25
+ 382:	8f 91       	pop	r24
+ 384:	7f 91       	pop	r23
+ 386:	6f 91       	pop	r22
+ 388:	5f 91       	pop	r21
+ 38a:	4f 91       	pop	r20
+ 38c:	3f 91       	pop	r19
+ 38e:	2f 91       	pop	r18
+ 390:	0f 90       	pop	r0
+ 392:	0f be       	out	0x3f, r0	; 63
+ 394:	0f 90       	pop	r0
+ 396:	1f 90       	pop	r1
+ 398:	18 95       	reti
+
+0000039a <__vector_19>:
+
+ISR(USART_UDRE_vect){
+ 39a:	1f 92       	push	r1
+ 39c:	0f 92       	push	r0
+ 39e:	0f b6       	in	r0, 0x3f	; 63
+ 3a0:	0f 92       	push	r0
+ 3a2:	11 24       	eor	r1, r1
+ 3a4:	2f 93       	push	r18
+ 3a6:	3f 93       	push	r19
+ 3a8:	4f 93       	push	r20
+ 3aa:	5f 93       	push	r21
+ 3ac:	6f 93       	push	r22
+ 3ae:	7f 93       	push	r23
+ 3b0:	8f 93       	push	r24
+ 3b2:	9f 93       	push	r25
+ 3b4:	af 93       	push	r26
+ 3b6:	bf 93       	push	r27
+ 3b8:	ef 93       	push	r30
+ 3ba:	ff 93       	push	r31
 	if (bufferUART_TX.Count() > 0)
- 182:	80 e0       	ldi	r24, 0x00	; 0
- 184:	91 e0       	ldi	r25, 0x01	; 1
- 186:	0e 94 7f 00 	call	0xfe	; 0xfe <_ZN10RingBuffer5CountEv>
- 18a:	88 23       	and	r24, r24
- 18c:	39 f0       	breq	.+14     	; 0x19c <__vector_19+0x3c>
+ 3bc:	8d e2       	ldi	r24, 0x2D	; 45
+ 3be:	93 e0       	ldi	r25, 0x03	; 3
+ 3c0:	0e 94 78 01 	call	0x2f0	; 0x2f0 <_ZN10RingBuffer5CountEv>
+ 3c4:	88 23       	and	r24, r24
+ 3c6:	39 f0       	breq	.+14     	; 0x3d6 <__vector_19+0x3c>
 	{
 		UDR0 = bufferUART_TX.Read();
- 18e:	80 e0       	ldi	r24, 0x00	; 0
- 190:	91 e0       	ldi	r25, 0x01	; 1
- 192:	0e 94 5c 00 	call	0xb8	; 0xb8 <_ZN10RingBuffer4ReadEv>
- 196:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__DATA_REGION_ORIGIN__+0x66>
- 19a:	05 c0       	rjmp	.+10     	; 0x1a6 <__vector_19+0x46>
+ 3c8:	8d e2       	ldi	r24, 0x2D	; 45
+ 3ca:	93 e0       	ldi	r25, 0x03	; 3
+ 3cc:	0e 94 55 01 	call	0x2aa	; 0x2aa <_ZN10RingBuffer4ReadEv>
+ 3d0:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__DATA_REGION_ORIGIN__+0x66>
+ 3d4:	05 c0       	rjmp	.+10     	; 0x3e0 <__vector_19+0x46>
 	} else {
 		//Disable interrupt if send register is empty
 		UCSR0B &= ~(1 << UDRIE0);
- 19c:	e1 ec       	ldi	r30, 0xC1	; 193
- 19e:	f0 e0       	ldi	r31, 0x00	; 0
- 1a0:	80 81       	ld	r24, Z
- 1a2:	8f 7d       	andi	r24, 0xDF	; 223
- 1a4:	80 83       	st	Z, r24
+ 3d6:	e1 ec       	ldi	r30, 0xC1	; 193
+ 3d8:	f0 e0       	ldi	r31, 0x00	; 0
+ 3da:	80 81       	ld	r24, Z
+ 3dc:	8f 7d       	andi	r24, 0xDF	; 223
+ 3de:	80 83       	st	Z, r24
 	}
 }
- 1a6:	ff 91       	pop	r31
- 1a8:	ef 91       	pop	r30
- 1aa:	bf 91       	pop	r27
- 1ac:	af 91       	pop	r26
- 1ae:	9f 91       	pop	r25
- 1b0:	8f 91       	pop	r24
- 1b2:	7f 91       	pop	r23
- 1b4:	6f 91       	pop	r22
- 1b6:	5f 91       	pop	r21
- 1b8:	4f 91       	pop	r20
- 1ba:	3f 91       	pop	r19
- 1bc:	2f 91       	pop	r18
- 1be:	0f 90       	pop	r0
- 1c0:	0f be       	out	0x3f, r0	; 63
- 1c2:	0f 90       	pop	r0
- 1c4:	1f 90       	pop	r1
- 1c6:	18 95       	reti
+ 3e0:	ff 91       	pop	r31
+ 3e2:	ef 91       	pop	r30
+ 3e4:	bf 91       	pop	r27
+ 3e6:	af 91       	pop	r26
+ 3e8:	9f 91       	pop	r25
+ 3ea:	8f 91       	pop	r24
+ 3ec:	7f 91       	pop	r23
+ 3ee:	6f 91       	pop	r22
+ 3f0:	5f 91       	pop	r21
+ 3f2:	4f 91       	pop	r20
+ 3f4:	3f 91       	pop	r19
+ 3f6:	2f 91       	pop	r18
+ 3f8:	0f 90       	pop	r0
+ 3fa:	0f be       	out	0x3f, r0	; 63
+ 3fc:	0f 90       	pop	r0
+ 3fe:	1f 90       	pop	r1
+ 400:	18 95       	reti
 
-000001c8 <_GLOBAL__sub_I_bufferUART_RX>:
+00000402 <_GLOBAL__sub_I_bufferUART_RX>:
  *  Author: mikda
  */ 
 
 #include "Includes.h"
 
 RingBuffer bufferUART_RX;
- 1c8:	82 e0       	ldi	r24, 0x02	; 2
- 1ca:	92 e0       	ldi	r25, 0x02	; 2
- 1cc:	0e 94 55 00 	call	0xaa	; 0xaa <_ZN10RingBufferC1Ev>
+ 402:	8f e2       	ldi	r24, 0x2F	; 47
+ 404:	94 e0       	ldi	r25, 0x04	; 4
+ 406:	0e 94 4e 01 	call	0x29c	; 0x29c <_ZN10RingBufferC1Ev>
 RingBuffer bufferUART_TX;
- 1d0:	80 e0       	ldi	r24, 0x00	; 0
- 1d2:	91 e0       	ldi	r25, 0x01	; 1
- 1d4:	0e 94 55 00 	call	0xaa	; 0xaa <_ZN10RingBufferC1Ev>
- 1d8:	08 95       	ret
+ 40a:	8d e2       	ldi	r24, 0x2D	; 45
+ 40c:	93 e0       	ldi	r25, 0x03	; 3
+ 40e:	0e 94 4e 01 	call	0x29c	; 0x29c <_ZN10RingBufferC1Ev>
+ 412:	08 95       	ret
 
-000001da <__tablejump2__>:
- 1da:	ee 0f       	add	r30, r30
- 1dc:	ff 1f       	adc	r31, r31
- 1de:	05 90       	lpm	r0, Z+
- 1e0:	f4 91       	lpm	r31, Z
- 1e2:	e0 2d       	mov	r30, r0
- 1e4:	09 94       	ijmp
+00000414 <__tablejump2__>:
+ 414:	ee 0f       	add	r30, r30
+ 416:	ff 1f       	adc	r31, r31
+ 418:	05 90       	lpm	r0, Z+
+ 41a:	f4 91       	lpm	r31, Z
+ 41c:	e0 2d       	mov	r30, r0
+ 41e:	09 94       	ijmp
 
-000001e6 <_exit>:
- 1e6:	f8 94       	cli
+00000420 <_exit>:
+ 420:	f8 94       	cli
 
-000001e8 <__stop_program>:
- 1e8:	ff cf       	rjmp	.-2      	; 0x1e8 <__stop_program>
+00000422 <__stop_program>:
+ 422:	ff cf       	rjmp	.-2      	; 0x422 <__stop_program>

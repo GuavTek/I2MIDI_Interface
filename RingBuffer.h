@@ -13,6 +13,7 @@ class RingBuffer
 {
 public:
 	uint8_t Read();
+	uint8_t Peek();
 	void Write(uint8_t in);
 	uint8_t Count();
 	void Flush();

@@ -21,6 +21,11 @@ uint8_t RingBuffer::Read(){
 	return 0;
 }
 
+uint8_t RingBuffer::Peek(){
+	uint8_t tempTail = tail + 1;
+	return buffer[tempTail];
+}
+
 void RingBuffer::Write(uint8_t in){
 	if (Count() < 255)
 	{
