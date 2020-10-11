@@ -8,6 +8,7 @@
 #include "Includes.h"
 
 void Merge();
+void TimerInit();
 struct MergeStatus status;
 bool thruUART = false;
 
@@ -17,6 +18,7 @@ int main(void)
 	I2C_Init();
 	PORTB = 1 << PINB4;	//Pullup, insert button
 	DDRB = 1 << PINB3;	//Insert led
+	
 	status.currentSource = DIN5;
 	status.dinDone = 1;
 	status.I2CDone = 1;
@@ -35,6 +37,17 @@ int main(void)
     }
 }
 
+void TimerInit(){
+	//Set clock and CTC mode.
+	TCCR1B = (1 << WGM12)|(1 << CS10);
+	
+	//Set timer period = 1ms
+	OCR1A = 16000;
+	
+	//Enable interrupt
+	TIMSK1 = 1 << OCIE1A;
+}
+
 //To do: implement timeout function
 //Prevent source-switching caused by data not received yet
 void Merge(){
@@ -45,9 +58,10 @@ void Merge(){
 			if (bufferUART_RX.Count() > 0)
 			{
 				status.currentChar = bufferUART_RX.Read();	
+				//reset timer
+				TCNT1 = 0;
 			} else {
-				//No data, change source
-				status.currentSource = I2C;
+				//No data
 				return;
 			}
 			
@@ -55,16 +69,33 @@ void Merge(){
 			{
 				//Next char is command byte
 				status.currentSource = I2C;
-				status.msgDone = 1;
 			}
+			
+			//Try to load character
+			if (TXI2C(status.currentChar))
+			{
+				//I2C failed
+				status.I2CDone = 0;
+			}
+			
+			if (thruUART)
+			{
+				if (UART_TX(status.currentChar))
+				{
+					//Uart failed
+					status.dinDone = 0;
+				}
+			}
+			
 			
 		} else {
 			if (I2Cbuffer_RX.Count() > 0)
 			{
 				status.currentChar = I2Cbuffer_RX.Read();
+				//reset timer
+				TCNT1 = 0;
 			} else {
-				//No data, change source
-				status.currentSource = DIN5;
+				//No data
 				return;
 			}
 			
@@ -72,15 +103,16 @@ void Merge(){
 			{
 				//Next char is command byte
 				status.currentSource = DIN5;
-				status.msgDone = 1;
 			}
 			
+			//Try to load character
+			if (UART_TX(status.currentChar))
+			{
+				//Uart failed
+				status.dinDone = 0;
+			}
 		}
-		
-		//Check if char is command byte
-		
-		//Try to load character
-		
+			
 	} else if (!status.I2CDone) {
 		if (!TXI2C(status.currentChar))
 		{
@@ -91,6 +123,18 @@ void Merge(){
 		{
 			status.dinDone = 1;
 		}
+	}
+}
+
+ISR(TIMER1_COMPA_vect){
+	//Byte timeout, switch source
+	if (status.currentSource == DIN5)
+	{
+		status.currentSource = I2C;
+	} 
+	else
+	{
+		status.currentSource = DIN5;
 	}
 }
 

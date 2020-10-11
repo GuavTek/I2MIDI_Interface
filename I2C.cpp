@@ -18,6 +18,7 @@
 	uint8_t wordTail = 0;
 	
 	bool isTransmitting = false;
+	bool addressDone = false;
 	
 	RingBuffer I2Cbuffer_RX;
 	RingBuffer I2Cbuffer_TX;
@@ -45,20 +46,26 @@ void SendI2C(uint8_t ack){
 	
 	if (ack | !RepeatNoAck)
 	{
-		if (wordLength[wordTail] == 0)
+		if (addressDone)
 		{
-			EndTransmission();
-			
-			wordTail++;
-			if (wordTail > 31)
+			if (wordLength[wordTail] == 0)
 			{
-				wordTail = 0;
-			}
+				EndTransmission();
 			
-			return;
+				wordTail++;
+				if (wordTail > 31)
+				{
+					wordTail = 0;
+				}
+			
+				return;
+			} else {
+				wordLength[wordTail]--;
+				currentChar = I2Cbuffer_TX.Read();
+			}
 		} else {
-			wordLength[wordTail]--;
-			currentChar = I2Cbuffer_TX.Read();
+			currentChar = I2CAddress;
+			addressDone = true;
 		}
 	}
 	TWDR = currentChar;
@@ -86,6 +93,7 @@ void StartTransmission(){
 	{
 		TWCR |= (1 << TWSTA);
 		isTransmitting = true;
+		addressDone = false;
 	}
 }
 
