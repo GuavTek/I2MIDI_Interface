@@ -2,7 +2,7 @@
  * I2C.h
  *
  * Created: 25-Sep-20 15:31:18
- *  Author: mikda
+ *  Author: Davod
  */ 
 
 
@@ -12,7 +12,7 @@
 #include "RingBuffer.h"
 #define I2CAddress 0x6c
 
-	extern RingBuffer I2Cbuffer_RX;
+	extern RingBuffer<32> I2Cbuffer_RX;
 
 	void I2C_Init();
 	void StartTransmission();

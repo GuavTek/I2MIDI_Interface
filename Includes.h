@@ -2,14 +2,14 @@
  * Includes.h
  *
  * Created: 23-Sep-20 14:43:24
- *  Author: mikda
+ *  Author: Davod
  */ 
 
 
 #ifndef INCLUDES_H_
 #define INCLUDES_H_
 
-#define F_CPU 16000000
+#define F_CPU 20000000
 
 enum MIDISource {
 	DIN5,
@@ -22,6 +22,7 @@ enum MIDISource {
 #include "UART.h"
 #include "I2C.h"
 #include "RingBuffer.h"
+#include "LedActivity.h"
 
 struct MergeStatus{
 	uint8_t currentChar;

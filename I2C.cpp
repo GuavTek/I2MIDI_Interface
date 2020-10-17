@@ -2,38 +2,42 @@
  * I2C.cpp
  *
  * Created: 25-Sep-20 15:31:00
- *  Author: mikda
+ *  Author: Davod
  */ 
 
 	#include "Includes.h"
 
 	#define SCL_FREQ 100000
-	#define TWBR_VAL F_CPU/(2*SCL_FREQ) - 8
-	#define RepeatNoAck false
+	#define TWBAUD (F_CPU-10)/(2*SCL_FREQ)
+	#define CareAck false
 	
 	uint8_t currentChar;
 	
-	uint8_t wordLength[32];
-	uint8_t wordHead = 0;
-	uint8_t wordTail = 0;
-	
+	RingBuffer<16> wordLength;
+	uint8_t currentWord;
+		
 	bool isTransmitting = false;
 	bool addressDone = false;
 	
-	RingBuffer I2Cbuffer_RX;
-	RingBuffer I2Cbuffer_TX;
+	RingBuffer<32> I2Cbuffer_RX;
+	RingBuffer<32> I2Cbuffer_TX;
 
 //Initialize I2C
 void I2C_Init(){
 	//Set SCL
-	TWBR = TWBR_VAL;
+	TWI0.MBAUD = TWBAUD;
 	
+	//Set master interrupt
+	TWI0.MCTRLA = TWI_WIEN_bm|TWI_QCEN_bm|TWI_ENABLE_bm;
+	
+	//Force bus-state to idle
+	TWI0.MSTATUS = TWI_BUSSTATE_IDLE_gc;
+		
 	//Set slave address
-	TWAR = I2CAddress << 1;
+	TWI0.SADDR = I2CAddress << 1;
 	
-	//Enable TW and interrupt
-	TWCR = (1 << TWEN)|(1 << TWIE)|(1 << TWEA);
-	
+	//Set slave interrupt
+	TWI0.SCTRLA = TWI_DIEN_bm|TWI_SMEN_bm|TWI_ENABLE_bm;	
 }
 
 //Read from RX buffer
@@ -44,45 +48,33 @@ uint8_t ReadI2C(){
 //Loads next byte into I2C data register
 void SendI2C(uint8_t ack){
 	
-	if (ack | !RepeatNoAck)
+	if (ack)
 	{
-		if (addressDone)
+		if (currentWord == 0)
 		{
-			if (wordLength[wordTail] == 0)
-			{
-				EndTransmission();
-			
-				wordTail++;
-				if (wordTail > 31)
-				{
-					wordTail = 0;
-				}
-			
-				return;
-			} else {
-				wordLength[wordTail]--;
-				currentChar = I2Cbuffer_TX.Read();
-			}
+			EndTransmission();		
+			return;
 		} else {
-			currentChar = I2CAddress;
-			addressDone = true;
+			currentWord--;
+			currentChar = I2Cbuffer_TX.Read();
 		}
 	}
-	TWDR = currentChar;
+	
+	addressDone = true;
+	//Put byte in TWI buffer
+	TWI0.MDATA = currentChar;
+	
+	I2C_Activity();
 }
 
 //Indicates that a message has been loaded into TX buffer
 uint8_t WordReady(uint8_t length){
-	if (WordCountI2C() > 31)
+	if (wordLength.Count() >= wordLength.length - 1)
 	{
 		return 1; //Failed, full
 	}
-	wordHead++;
-	if (wordHead > 31)
-	{
-		wordHead = 0;
-	}
-	wordLength[wordHead] = length;
+	
+	wordLength.Write(length);
 	
 	return 0;	//Success
 }
@@ -91,15 +83,15 @@ uint8_t WordReady(uint8_t length){
 void StartTransmission(){
 	if (!isTransmitting)
 	{
-		TWCR |= (1 << TWSTA);
-		isTransmitting = true;
 		addressDone = false;
+		isTransmitting = true;
+		TWI0.MADDR = I2CAddress << 1;
 	}
 }
 
 //Stops I2C transmission
 void EndTransmission(){
-	TWCR |= (1 << TWSTO);
+	TWI0.MCTRLB |= TWI_MCMD_STOP_gc;
 	isTransmitting = false;
 }
 
@@ -110,17 +102,12 @@ uint8_t RXCountI2C(){
 
 //Returns how many MIDI messages are loaded in buffers
 uint8_t WordCountI2C(){
-	uint8_t tempCount = wordHead - wordTail;
-/*	if (tempCount > 31)
-	{
-		tempCount -= 255;
-	}*/
-	return tempCount;
+	return wordLength.Count();
 }
 
 //Loads I2C byte into buffer
 uint8_t TXI2C(uint8_t msg){
-	if (I2Cbuffer_TX.Count() > 254)
+	if (I2Cbuffer_TX.Count() > I2Cbuffer_TX.length)
 	{
 		return 1;
 	}
@@ -128,21 +115,31 @@ uint8_t TXI2C(uint8_t msg){
 	return 0;
 }
 
-ISR(TWI_vect){
-	uint8_t status = TWSR & 0b11111000;
-	if ((status  == 0x80)|(status == 0x88)|(status == 0x90)|(status == 0x98))
-	{
-		I2Cbuffer_RX.Write(TWDR);
-	}
-	else if ((status == 0x08)|(status == 0x10)|(status == 0x28))
-	{
-		//ACK received
+//Slave interrupt
+ISR(TWI0_TWIS_vect){
+	I2Cbuffer_RX.Write(TWI0.SDATA);
+	TWI0.SCTRLB = TWI_SCMD_RESPONSE_gc;
+}
+
+//Master interrupt
+ISR(TWI0_TWIM_vect){
+	uint8_t status = TWI0.MSTATUS;
+	
+	if ((status & TWI_ARBLOST_bm)) {
+		//Lost arbitration, resend
+		if (addressDone)
+		{
+			SendI2C(0);
+		}
+		
+		//Clear arblost flag
+		TWI0.MSTATUS |= TWI_ARBLOST_bm;
+	} else if ((status & TWI_RXACK_bm) || !CareAck) {
+		//ack
 		SendI2C(1);
-	}
-	else if ((status == 0x20)|(status == 0x30))
-	{
-		//not ack
+	} else {
+		//No ack
 		SendI2C(0);
 	}
-	TWCR |= 1 << TWINT;
+	
 }

@@ -2,22 +2,30 @@
  * I2MIDI_Interface.cpp
  *
  * Created: 23-Sep-20 16:18:43
- * Author : mikda
+ * Author : Davod
  */ 
 
 #include "Includes.h"
-
+void CLK_Init();
 void Merge();
-void TimerInit();
+void Timer_Init();
 struct MergeStatus status;
 bool thruUART = false;
 
 int main(void)
 {
+	CLK_Init();
+	Timer_Init();
 	UART_Init();
 	I2C_Init();
-	PORTB = 1 << PINB4;	//Pullup, insert button
-	DDRB = 1 << PINB3;	//Insert led
+	Led_Init();
+	
+	//Set button pullup
+	//PORTB.PIN2CTRL = PORT_PULLUPEN_bm;
+	
+	//Set LEDS as output
+	PORTB.DIRSET = PIN4_bm;
+	PORTA.DIRSET = PIN7_bm;
 	
 	status.currentSource = DIN5;
 	status.dinDone = 1;
@@ -26,7 +34,7 @@ int main(void)
 	
     while (1) 
     {
-		thruUART = PINB & (1 << PINB4);	//Insert button here
+		thruUART = PORTB.IN & PIN2_bm;	//Insert button here
 		Merge();
 		
 		if (WordCountI2C() > 0)
@@ -37,19 +45,27 @@ int main(void)
     }
 }
 
-void TimerInit(){
-	//Set clock and CTC mode.
-	TCCR1B = (1 << WGM12)|(1 << CS10);
-	
-	//Set timer period = 1ms
-	OCR1A = 16000;
-	
-	//Enable interrupt
-	TIMSK1 = 1 << OCIE1A;
+void CLK_Init(){
+	//Disable prescaler
+	CCP = CCP_IOREG_gc;
+	CLKCTRL.MCLKCTRLB &= ~CLKCTRL_PEN_bm;
 }
 
-//To do: implement timeout function
-//Prevent source-switching caused by data not received yet
+void Timer_Init(){
+	//Set normal mode.
+	TCA0.SINGLE.CTRLB = TCA_SINGLE_WGMODE_NORMAL_gc;
+	
+	//Set timer period = 1ms
+	TCA0.SINGLE.PER = 1250;
+	
+	//Enable interrupt
+	TCA0.SINGLE.INTCTRL = TCA_SINGLE_OVF_bm;
+	
+	//Enable timer
+	TCA0.SINGLE.CTRLA = TCA_SINGLE_CLKSEL_DIV16_gc|TCA_SINGLE_ENABLE_bm;
+}
+
+
 void Merge(){
 	if (status.dinDone && status.I2CDone) {
 		//Get character
@@ -59,7 +75,7 @@ void Merge(){
 			{
 				status.currentChar = bufferUART_RX.Read();	
 				//reset timer
-				TCNT1 = 0;
+				TCA0.SINGLE.CNT = 0;
 			} else {
 				//No data
 				return;
@@ -93,7 +109,7 @@ void Merge(){
 			{
 				status.currentChar = I2Cbuffer_RX.Read();
 				//reset timer
-				TCNT1 = 0;
+				TCA0.SINGLE.CNT = 0;
 			} else {
 				//No data
 				return;
@@ -126,7 +142,7 @@ void Merge(){
 	}
 }
 
-ISR(TIMER1_COMPA_vect){
+ISR(TCA0_OVF_vect){
 	//Byte timeout, switch source
 	if (status.currentSource == DIN5)
 	{
@@ -137,4 +153,3 @@ ISR(TIMER1_COMPA_vect){
 		status.currentSource = DIN5;
 	}
 }
-

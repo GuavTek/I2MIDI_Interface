@@ -2,7 +2,7 @@
  * UART.h
  *
  * Created: 23-Sep-20 14:43:00
- *  Author: mikda
+ *  Author: Davod
  */ 
 
 
@@ -11,7 +11,7 @@
 
 #include "RingBuffer.h"
 
-extern RingBuffer bufferUART_RX;
+extern RingBuffer<32> bufferUART_RX;
 
 void UART_Init();
 uint8_t UART_TX(uint8_t msg);
