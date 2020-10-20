@@ -10,7 +10,7 @@ void CLK_Init();
 void Merge();
 void Timer_Init();
 struct MergeStatus status;
-bool thruUART = false;
+volatile uint8_t thruUART = 0;
 
 int main(void)
 {
@@ -31,6 +31,7 @@ int main(void)
 	status.dinDone = 1;
 	status.I2CDone = 1;
 	
+	sei();
 	
     while (1) 
     {
@@ -60,6 +61,8 @@ void Timer_Init(){
 	
 	//Enable interrupt
 	TCA0.SINGLE.INTCTRL = TCA_SINGLE_OVF_bm;
+	
+	TCA0.SINGLE.DBGCTRL = Debug;
 	
 	//Enable timer
 	TCA0.SINGLE.CTRLA = TCA_SINGLE_CLKSEL_DIV16_gc|TCA_SINGLE_ENABLE_bm;
@@ -143,6 +146,9 @@ void Merge(){
 }
 
 ISR(TCA0_OVF_vect){
+	//Clear interrupt flag
+	TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm;
+	
 	//Byte timeout, switch source
 	if (status.currentSource == DIN5)
 	{

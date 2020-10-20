@@ -10,6 +10,7 @@
 #define INCLUDES_H_
 
 #define F_CPU 20000000
+#define Debug 0
 
 enum MIDISource {
 	DIN5,

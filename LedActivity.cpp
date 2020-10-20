@@ -14,11 +14,13 @@ void Led_Init(){
 	//Enable interrupt
 	TCB0.INTCTRL = TCB_CAPT_bm;
 	
+	TCB0.DBGCTRL = Debug;
+	
 	//Periodic interrupt mode
 	TCB0.CTRLB = TCB_CNTMODE_INT_gc;
 	
 	//Set period
-	TCB0.CCMP = 4000;
+	TCB0.CCMP = 8000;
 	
 	//Enable timer
 	TCB0.CTRLA |= TCB_ENABLE_bm;
