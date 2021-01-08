@@ -24,6 +24,8 @@ void Led_Init(){
 	
 	//Enable timer
 	TCB0.CTRLA |= TCB_ENABLE_bm;
+	
+	TCB0.DBGCTRL |= Debug;
 
 	//Enable LED outputs
 	PORTA.DIRSET = PIN7_bm; //I2C

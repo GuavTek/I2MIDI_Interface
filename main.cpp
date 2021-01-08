@@ -33,6 +33,11 @@ int main(void)
 	
 	sei();
 	
+	_delay_ms(300);
+	
+	TXI2C('L');
+	WordReady(1);
+	
     while (1) 
     {
 		thruUART = PORTB.IN & PIN2_bm;	//Insert button here
