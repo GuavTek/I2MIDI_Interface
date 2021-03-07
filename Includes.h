@@ -27,6 +27,7 @@ enum MIDISource {
 
 struct MergeStatus{
 	uint8_t currentChar;
+	uint8_t length;
 	enum MIDISource currentSource;
 	uint8_t dinDone;
 	uint8_t I2CDone;
