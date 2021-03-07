@@ -10,7 +10,6 @@ void CLK_Init();
 void Merge();
 void Timer_Init();
 struct MergeStatus status;
-volatile uint8_t thruUART = 0;
 
 int main(void)
 {
@@ -33,14 +32,13 @@ int main(void)
 	
 	sei();
 	
-	_delay_ms(300);
+	//_delay_ms(300);
 	
-	TXI2C('L');
-	WordReady(1);
+	//TXI2C('L');
+	//WordReady(1);
 	
     while (1) 
     {
-		thruUART = PORTB.IN & PIN2_bm;	//Insert button here
 		Merge();
 		
 		if (WordCountI2C() > 0)
@@ -54,7 +52,7 @@ int main(void)
 void CLK_Init(){
 	//Disable prescaler
 	CCP = CCP_IOREG_gc;
-	CLKCTRL.MCLKCTRLB &= ~CLKCTRL_PEN_bm;
+	CLKCTRL.MCLKCTRLB = 0;
 }
 
 void Timer_Init(){
@@ -76,11 +74,32 @@ void Timer_Init(){
 
 void Merge(){
 	if (status.dinDone && status.I2CDone) {
+		
+		if (status.msgDone)
+		{
+			status.msgDone = 0;
+			
+			if (status.currentSource == DIN5)
+			{
+				status.currentSource = I2C;
+				
+				if (status.length > 0)
+				{
+					WordReady(status.length);
+				}
+			} else {
+				status.currentSource = DIN5;
+			}
+			
+			status.length = 0;
+		}
+		
 		//Get character
 		if (status.currentSource == DIN5)
 		{
 			if (bufferUART_RX.Count() > 0)
 			{
+				status.length++;
 				status.currentChar = bufferUART_RX.Read();	
 				//reset timer
 				TCA0.SINGLE.CNT = 0;
@@ -92,7 +111,7 @@ void Merge(){
 			if (bufferUART_RX.Peek() > 127)
 			{
 				//Next char is command byte
-				status.currentSource = I2C;
+				status.msgDone = 1;
 			}
 			
 			//Try to load character
@@ -102,7 +121,7 @@ void Merge(){
 				status.I2CDone = 0;
 			}
 			
-			if (thruUART)
+			if (!(PORTC.IN & PIN2_bm))
 			{
 				if (UART_TX(status.currentChar))
 				{
@@ -115,6 +134,7 @@ void Merge(){
 		} else {
 			if (I2Cbuffer_RX.Count() > 0)
 			{
+				status.length++;
 				status.currentChar = I2Cbuffer_RX.Read();
 				//reset timer
 				TCA0.SINGLE.CNT = 0;
@@ -126,7 +146,7 @@ void Merge(){
 			if (I2Cbuffer_RX.Peek() > 127)
 			{
 				//Next char is command byte
-				status.currentSource = DIN5;
+				status.msgDone = 1;
 			}
 			
 			//Try to load character
@@ -155,12 +175,5 @@ ISR(TCA0_OVF_vect){
 	TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm;
 	
 	//Byte timeout, switch source
-	if (status.currentSource == DIN5)
-	{
-		status.currentSource = I2C;
-	} 
-	else
-	{
-		status.currentSource = DIN5;
-	}
+	status.msgDone = 1;
 }
