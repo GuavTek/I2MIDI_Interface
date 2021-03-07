@@ -8,7 +8,7 @@
 	#include "Includes.h"
 
 	#define SCL_FREQ 100000
-	#define TWBAUD (F_CPU-10)/(2*SCL_FREQ)
+	#define TWBAUD (F_CPU/(2*SCL_FREQ) - 5)
 	#define CareAck false
 	
 	uint8_t currentChar;
@@ -22,20 +22,27 @@
 	RingBuffer<32> I2Cbuffer_RX;
 	RingBuffer<32> I2Cbuffer_TX;
 
+	volatile uint8_t test = 0;
+
 //Initialize I2C
 void I2C_Init(){
 	//Set pins high because weird bug
 	PORTB.OUTSET = PIN0_bm|PIN1_bm;
+	PORTB.DIRCLR = PIN0_bm|PIN1_bm;
+	
+	//TWI0.CTRLA = TWI_SDAHOLD_50NS_gc;
 	
 	//Set SCL
 	TWI0.MBAUD = TWBAUD;
 	//TWI0_MBAUD = TWBAUD;
 	
+	TWI0.MCTRLB = TWI_FLUSH_bm;
+	
 	//Set master interrupt
 	TWI0.MCTRLA = TWI_WIEN_bm|TWI_ENABLE_bm;
 	//TWI0_MCTRLA = TWI_WIEN_bm|TWI_ENABLE_bm;
 	
-	TWI0.MCTRLB = TWI_FLUSH_bm;
+	PORTB.DIRSET = PIN0_bm|PIN1_bm;
 	
 	//Force bus-state to idle
 	TWI0.MSTATUS = TWI_BUSSTATE_IDLE_gc;
@@ -46,7 +53,7 @@ void I2C_Init(){
 	//TWI0_SADDR = I2CAddress << 1;
 	
 	//Set slave interrupt
-	TWI0.SCTRLA = TWI_DIEN_bm|TWI_SMEN_bm|TWI_ENABLE_bm;
+	TWI0.SCTRLA = TWI_APIEN_bm|TWI_DIEN_bm|TWI_ENABLE_bm;
 	//TWI0_SCTRLA = TWI_DIEN_bm|TWI_SMEN_bm|TWI_ENABLE_bm;	
 }
 
@@ -100,11 +107,10 @@ void StartTransmission(){
 		}
 		
 		TWI0.MADDR = I2CAddress << 1;
-		
 		currentWord = wordLength.Read();
 		addressDone = false;
 		isTransmitting = true;
-		SendI2C(1);
+		//SendI2C(1);
 	}
 }
 
@@ -137,13 +143,27 @@ uint8_t TXI2C(uint8_t msg){
 
 //Slave interrupt
 ISR(TWI0_TWIS_vect){
-	I2Cbuffer_RX.Write(TWI0.SDATA);
-	TWI0.SCTRLB = TWI_SCMD_RESPONSE_gc;
-	//TWI0_SCTRLB = TWI_SCMD_RESPONSE_gc;
+	if ((TWI0.MSTATUS & 0b11) == TWI_BUSSTATE_OWNER_gc)
+	{
+		//Self-triggered
+		volatile uint8_t wat = 4;	//TWI hangs without this
+		TWI0.SSTATUS = TWI_DIF_bm|TWI_APIF_bm;
+		//TWI0.SCTRLB = TWI_ACKACT_ACK_gc|TWI_SCMD_NOACT_gc;
+		return;
+	}
+	
+	TWI0.SCTRLB = TWI_ACKACT_ACK_gc|TWI_SCMD_RESPONSE_gc;
+	
+	if (TWI0.SSTATUS & TWI_DIF_bm)
+	{
+		I2Cbuffer_RX.Write(TWI0.SDATA);
+	}
 }
 
 //Master interrupt
 ISR(TWI0_TWIM_vect){
+	//I2C_Activity();
+	
 	uint8_t status = TWI0.MSTATUS;
 	//uint8_t status = TWI0_MSTATUS;
 	
